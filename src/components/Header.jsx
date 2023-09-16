@@ -1,4 +1,6 @@
-export default function Header() {
+import MenuList from "./MenuList";
+
+export default function Header({ selectedMenuId }) {
   return (
     <div className="header-2 ">
       <nav className="bg-white py-2 md:py-4 dark:bg-gray-800">
@@ -20,18 +22,7 @@ export default function Header() {
             className="hidden md:flex flex-col md:flex-row md:ml-auto mt-3 md:mt-0"
             id="navbar-collapse"
           >
-            <a
-              href="/"
-              className="p-2 lg:px-4 md:mx-2 text-white rounded bg-indigo-600"
-            >
-              단축 URL 생성
-            </a>
-            <a
-              href="/expire"
-              className="p-2 lg:px-4 md:mx-2 text-gray-600 rounded hover:bg-gray-200 hover:text-gray-700 transition-colors duration-300 dark:text-gray-300"
-            >
-              URL 만료하기
-            </a>
+            <MenuList selectedMenuId={selectedMenuId} />
           </div>
         </div>
       </nav>
