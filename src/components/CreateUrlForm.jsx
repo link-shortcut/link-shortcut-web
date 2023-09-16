@@ -54,10 +54,10 @@ export default function CreateUrlForm() {
   const showURLValidationError = () => {
     if (hasURLError) {
       return (
-        <p className="text-sm text-red-600">
+        <h3 className="text-sm font-semibold text-red-600">
           단축할 URL은 반드시 http나 https로 시작해야하며 유효한 형식이어야
           합니다.
-        </p>
+        </h3>
       );
     }
   };
