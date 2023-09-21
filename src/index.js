@@ -6,6 +6,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import RootLayout from "./routes/RootLayout";
 import CreateUrl from "./routes/CreateUrl";
 import ExpireUrl from "./routes/ExpireUrl";
+import GetUrlInfo from "./routes/GetUrlInfo";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,16 @@ const router = createBrowserRouter([
     path: "/expire",
     element: <RootLayout selectedMenuId="expireURL" />,
     children: [{ path: "/expire", element: <ExpireUrl /> }],
+  },
+  {
+    path: "/:shortenPath/info",
+    element: <RootLayout selectedMenuId="getURLInfo" />,
+    children: [
+      {
+        path: "/:shortenPath/info",
+        element: <GetUrlInfo />,
+      },
+    ],
   },
 ]);
 
