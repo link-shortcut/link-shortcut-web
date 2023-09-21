@@ -17,6 +17,10 @@ export default function CreateUrl() {
           단축 URL 생성시 자동으로 생성된 만료키를 이용해 단축 URL을 만료일이
           되기 전에 즉시 만료시킬 수 있습니다.
         </li>
+        <li className="italic font-light">
+          유효한 단축 URL 뒤에 "/info"를 붙이면 해당 URL 정보를 확인할 수
+          있습니다.
+        </li>
       </ul>
       <div className="flex py-3 pb-4 w-screen place-content-center">
         <div className="w-1/2">
