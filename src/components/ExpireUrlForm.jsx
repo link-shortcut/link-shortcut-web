@@ -18,7 +18,6 @@ export default function ExpireUrlForm() {
 
     expireShortenUrl(expireShortenUrlData)
       .then((response) => {
-        console.log(response);
         alert(
           `단축 URL "${process.env.REACT_APP_SERVER_HOST}/${shortenPath}" 가 만료되었습니다.`
         );
