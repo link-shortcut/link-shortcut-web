@@ -36,7 +36,7 @@ export default function GetUrlInfo() {
 
   return (
     <div className="flex m-4">
-      <div className="md:container md:mx-auto p-8 rounded shadow-lg dark:bg-gray-800 dark:shadow-lg">
+      <div className="md:container md:mx-auto p-8 rounded-lg shadow-lg dark:bg-gray-800 dark:shadow-lg">
         <div className="space-y-2">
           <div className="flex space-x-1">
             <LinkImg className="dark:fill-white" />
