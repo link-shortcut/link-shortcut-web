@@ -30,7 +30,6 @@ export default function CreateUrlForm() {
       .then((response) => {
         setShowModal(true);
         setResponseData(response.data);
-        console.log(response);
       })
       .catch((error) => {
         console.error(error);
