@@ -32,7 +32,11 @@ export default function GetUrlInfo() {
       });
   }, []);
 
-  const extractDate = (datetime) => datetime.slice(0, 10);
+  const extractDate = (datetime) => {
+    if (!!datetime) {
+      return datetime.slice(0, 10);
+    }
+  };
 
   return (
     <div className="flex m-4">
