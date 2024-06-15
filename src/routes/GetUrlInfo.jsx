@@ -30,7 +30,7 @@ export default function GetUrlInfo() {
         );
         navigate("/", { replace: true });
       });
-  }, []);
+  }, [navigate, shortenPath]);
 
   const extractDate = (datetime) => {
     if (!!datetime) {
