@@ -4,6 +4,7 @@ import InputBox from "./InputBox";
 import { createShortenUrl } from "../api/api";
 import CustomDatepicker from "./CustomDatepicker";
 import Modal from "./Modal";
+import Spinner from "./Spinner";
 
 export default function CreateUrlForm() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -11,11 +12,12 @@ export default function CreateUrlForm() {
     startDate: null,
     endDate: null,
   });
-  const [hasURLError, setHasURLError] = useState(false);
-  const [hasExpireDateError, setHasExpireDateError] = useState(false);
-
   const [showModal, setShowModal] = useState(false);
   const [responseData, setResponseData] = useState({});
+
+  const [loading, setLoading] = useState(false);
+
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleButton = () => {
     const createShortenUrlData = {
@@ -23,8 +25,8 @@ export default function CreateUrlForm() {
       expireDate: expireDate.endDate,
     };
 
-    setHasURLError(false);
-    setHasExpireDateError(false);
+    setLoading(true);
+    setErrorMessage("");
 
     createShortenUrl(createShortenUrlData)
       .then((response) => {
@@ -33,64 +35,42 @@ export default function CreateUrlForm() {
       })
       .catch((error) => {
         console.error(error);
-        handleValidationError(error);
+        setErrorMessage(error.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
       });
-  };
-
-  const handleValidationError = (error) => {
-    const errorResponseData = error.response.data;
-    if (errorResponseData.code === "400-01") {
-      setHasURLError(true);
-    } else if (errorResponseData.code === "400-02") {
-      setHasExpireDateError(true);
-    }
   };
 
   const handleChange = (event) => {
     setOriginalUrl(event.target.value);
   };
 
-  const showURLValidationError = () => {
-    if (hasURLError) {
-      return (
-        <h3 className="text-sm font-semibold text-red-600">
-          단축할 URL은 반드시 http나 https로 시작해야하며 유효한 형식이어야
-          합니다.
-        </h3>
-      );
-    }
-  };
-
-  const showExpireDateValidationError = () => {
-    if (hasExpireDateError) {
-      return (
-        <h3 className="text-sm font-semibold text-red-600">
-          만료일은 오늘보다 이전일 수 없으며 YYYY-MM-DD의 형식이어야 합니다.
-        </h3>
-      );
-    }
-  };
-
   return (
     <>
-      <div className="flex flex-col border border-stone-500 border-1 rounded-lg bg-gray-500 m-4 drop-shadow-lg">
-        <div className="flex flex-col space-y-2 mx-4 mt-4">
+      <div className="container p-4 min-w-[700px] border border-stone-500 border-1 rounded-md bg-gray-500 drop-shadow-lg">
+        <div className="flex flex-col items-center gap-3">
           <InputBox
             disabled={false}
             value={originalUrl}
             placeholder={"http(s):// 단축할 URL을 입력해주세요."}
             handleChange={handleChange}
           />
-          {showURLValidationError()}
           <CustomDatepicker
             date={expireDate}
             setDate={setExpireDate}
             placeholder={"만료일을 선택해주세요. (YYYY-MM-DD)"}
           />
-          {showExpireDateValidationError()}
-        </div>
-        <div className="m-3">
-          <Button disabled={false} name={`입력`} handleClick={handleButton} />
+          {!!errorMessage && (
+            <h3 className="text-sm font-semibold text-red-600">
+              {errorMessage}
+            </h3>
+          )}
+          <Button
+            disabled={loading}
+            name={loading ? <Spinner /> : `입력`}
+            handleClick={handleButton}
+          />
         </div>
       </div>
       <Modal

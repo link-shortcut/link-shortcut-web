@@ -1,22 +1,33 @@
 import { useState } from "react";
+import CopyIcon from "../assets/copy_icon.png";
+import CheckIcon from "../assets/check_icon.png";
+import Tooltip from "./Tooltip";
 
 export default function CopyButton({ text }) {
   const [isCopied, setIsCopied] = useState(false);
+  const [isTooltipVisible, setIsTooltipVisible] = useState(false);
 
   const handleClick = () => {
     navigator.clipboard.writeText(text);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 1500);
+    setIsTooltipVisible(true);
+    setTimeout(() => {
+      setIsCopied(false);
+      setIsTooltipVisible(false);
+    }, 1500);
   };
 
   return (
-    <button
-      className="bg-emerald-600 w-32 text-white active:bg-emerald-600 font-bold uppercase text-sm px-auto py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 hover:bg-emerald-900 disabled:bg-emerald-900"
-      type="button"
-      disabled={isCopied}
-      onClick={handleClick}
-    >
-      {isCopied ? "Copied!" : "Copy"}
-    </button>
+    <>
+      <Tooltip message="복사됨" isOpen={isTooltipVisible}>
+        <button type="button" disabled={isCopied} onClick={handleClick}>
+          <img
+            className="w-6 h-6"
+            src={isCopied ? CheckIcon : CopyIcon}
+            alt={isCopied ? "복사됨" : "복사하기"}
+          />
+        </button>
+      </Tooltip>
+    </>
   );
 }

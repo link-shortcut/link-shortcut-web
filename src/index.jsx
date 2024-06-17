@@ -3,10 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import RootLayout from "./routes/RootLayout";
-import CreateUrl from "./routes/CreateUrl";
-import ExpireUrl from "./routes/ExpireUrl";
-import GetUrlInfo from "./routes/GetUrlInfo";
+import RootLayout from "./components/layouts/RootLayout";
+import CreateUrl from "./pages/CreateUrl";
+import ExpireUrl from "./pages/ExpireUrl";
+import GetUrlInfo from "./pages/GetUrlInfo";
+import NotFoundRedirect from "./pages/NotFoundRedirect";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "*",
+    element: <NotFoundRedirect />,
+  },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -38,7 +43,4 @@ root.render(
   </React.StrictMode>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();

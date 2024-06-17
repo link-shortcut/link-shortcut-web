@@ -108,7 +108,7 @@ export default function GetUrlInfo() {
                     fill="currentFill"
                   />
                 </svg>
-                <span className="sr-only">Loading...</span>
+                <span className="sr-only">정보 가져오는 중...</span>
               </div>
             )}
           </div>

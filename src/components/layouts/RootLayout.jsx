@@ -1,14 +1,15 @@
 import { Outlet } from "react-router-dom";
-import Footer from "../components/Footer";
-import Header from "../components/Header";
-import "./App.css";
+import Footer from "../Footer";
+import Header from "../Header";
 
 export default function RootLayout({ selectedMenuId }) {
   return (
     <>
-      <div className="App min-h-screen dark:bg-gray-700">
+      <div className="min-h-screen dark:bg-gray-700">
         <Header selectedMenuId={selectedMenuId} />
-        <Outlet />
+        <div className="flex justify-center px-4">
+          <Outlet />
+        </div>
         <Footer />
       </div>
     </>
