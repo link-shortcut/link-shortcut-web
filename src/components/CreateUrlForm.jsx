@@ -4,6 +4,7 @@ import InputBox from "./InputBox";
 import { createShortenUrl } from "../api/api";
 import CustomDatepicker from "./CustomDatepicker";
 import Modal from "./Modal";
+import Spinner from "./Spinner";
 
 export default function CreateUrlForm() {
   const [originalUrl, setOriginalUrl] = useState("");
@@ -17,6 +18,8 @@ export default function CreateUrlForm() {
   const [showModal, setShowModal] = useState(false);
   const [responseData, setResponseData] = useState({});
 
+  const [loading, setLoading] = useState(false);
+
   const handleButton = () => {
     const createShortenUrlData = {
       originalUrl: originalUrl,
@@ -25,6 +28,7 @@ export default function CreateUrlForm() {
 
     setHasURLError(false);
     setHasExpireDateError(false);
+    setLoading(true);
 
     createShortenUrl(createShortenUrlData)
       .then((response) => {
@@ -34,6 +38,9 @@ export default function CreateUrlForm() {
       .catch((error) => {
         console.error(error);
         handleValidationError(error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -88,7 +95,11 @@ export default function CreateUrlForm() {
             placeholder={"만료일을 선택해주세요. (YYYY-MM-DD)"}
           />
           {showExpireDateValidationError()}
-          <Button disabled={false} name={`입력`} handleClick={handleButton} />
+          <Button
+            disabled={loading}
+            name={loading ? <Spinner /> : `입력`}
+            handleClick={handleButton}
+          />
         </div>
       </div>
       <Modal

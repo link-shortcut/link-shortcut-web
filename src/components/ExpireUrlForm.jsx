@@ -2,11 +2,13 @@ import { useState } from "react";
 import Button from "./Button";
 import InputBox from "./InputBox";
 import { expireShortenUrl } from "../api/api";
+import Spinner from "./Spinner";
 
 export default function ExpireUrlForm() {
   const [shortenPath, setShortenPath] = useState("");
   const [expireKey, setExpireKey] = useState("");
   const [hasError, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const handleButton = () => {
     const expireShortenUrlData = {
@@ -14,6 +16,7 @@ export default function ExpireUrlForm() {
       expireKey: expireKey,
     };
 
+    setLoading(true);
     setError(false);
 
     expireShortenUrl(expireShortenUrlData)
@@ -25,6 +28,9 @@ export default function ExpireUrlForm() {
       .catch((error) => {
         console.error(error);
         setError(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   };
 
@@ -63,7 +69,11 @@ export default function ExpireUrlForm() {
           />
           {showError()}
           <div className="flex w-full justify-center content-center">
-            <Button disabled={false} name={`입력`} handleClick={handleButton} />
+            <Button
+              disabled={loading}
+              name={loading ? <Spinner /> : `입력`}
+              handleClick={handleButton}
+            />
           </div>
         </div>
       </div>
