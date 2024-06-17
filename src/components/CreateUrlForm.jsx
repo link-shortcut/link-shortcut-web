@@ -73,8 +73,8 @@ export default function CreateUrlForm() {
 
   return (
     <>
-      <div className="flex flex-col border border-stone-500 border-1 rounded-lg bg-gray-500 m-4 drop-shadow-lg">
-        <div className="flex flex-col space-y-2 mx-4 mt-4">
+      <div className="container p-4 min-w-[700px] border border-stone-500 border-1 rounded-md bg-gray-500 drop-shadow-lg">
+        <div className="flex flex-col items-center gap-3">
           <InputBox
             disabled={false}
             value={originalUrl}
@@ -88,8 +88,6 @@ export default function CreateUrlForm() {
             placeholder={"만료일을 선택해주세요. (YYYY-MM-DD)"}
           />
           {showExpireDateValidationError()}
-        </div>
-        <div className="m-3">
           <Button disabled={false} name={`입력`} handleClick={handleButton} />
         </div>
       </div>
