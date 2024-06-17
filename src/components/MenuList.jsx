@@ -10,7 +10,7 @@ export default function MenuList({ selectedMenuId }) {
     {
       id: "expireURL",
       linkTo: "/expire",
-      menuName: "URL 만료하기",
+      menuName: "단축 URL 만료",
     },
   ];
 
