@@ -1,4 +1,5 @@
 import MenuList from "./MenuList";
+import LogoImage from "../assets/logo.png";
 
 export default function Header({ selectedMenuId }) {
   return (
@@ -20,10 +21,7 @@ export default function Header({ selectedMenuId }) {
 }
 
 const Logo = () => (
-  <a
-    href="/"
-    className="font-bold text-xl text-indigo-600 dark:text-indigo-400 hover:cursor-pointer"
-  >
-    Link Shortcut
+  <a href="/">
+    <img src={LogoImage} className="h-10" alt="Link Shortcut 로고" />
   </a>
 );
