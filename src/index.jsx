@@ -7,6 +7,7 @@ import RootLayout from "./components/layouts/RootLayout";
 import CreateUrl from "./pages/CreateUrl";
 import ExpireUrl from "./pages/ExpireUrl";
 import GetUrlInfo from "./pages/GetUrlInfo";
+import NotFoundRedirect from "./pages/NotFoundRedirect";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
         element: <GetUrlInfo />,
       },
     ],
+  },
+  {
+    path: "*",
+    element: <NotFoundRedirect />,
   },
 ]);
 
