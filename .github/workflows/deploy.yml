@@ -23,6 +23,10 @@ jobs:
           npm install
           npx update-browserslist-db@latest
 
+      - name: Setup environment variables
+        run: |
+          echo "${{ secrets.PROD_ENV }}" > .env
+
       - name: Build
         run: npm run build
 
