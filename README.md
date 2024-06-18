@@ -31,7 +31,7 @@ npm start
 ## 빌드/배포 자동화 구축
 
 <img src="./docs/architecture.png" width="840" height="600">
-<br /><br />
+<br />
 
 - main branch에 push될 경우 Github Actions가 작동하여 React 빌드 후 AWS S3에 자동으로 업로드 진행
 - NGINX를 통하여 AWS S3에 업로드된 HTML, JS, CSS 파일 배포
